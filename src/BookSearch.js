@@ -54,7 +54,8 @@ class BookSearch extends Component {
         </div>
         <div className="search-books-results">
           {<ol className="books-grid">
-            {showBooks.map((books) => (
+              {/* searchBooks to go below in place of showBooks */}
+            {showBooks.map((book) => (
               <li key={book.title}>
                 <div className="book"></div>
                 <div className="book-top"></div>
@@ -63,19 +64,17 @@ class BookSearch extends Component {
                   style={{
                     width: 128,
                     height: 193,
-                    backgroundImage: "url()",
+                    backgroundImage: `url(${book.imageLinks.thumbnail})`,
                   }}
                 />
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{book.author}</div>
                 <ShelfPicker
                   className="book-shelf-changer"
-                  onClick={() => onChangeShelf(book)}
+                  onChange={() => onChangeShelf(book)}
                 />
               </li>
             ))}
-
-            <ShelfPicker onClick={() => onChangeShelf(book)} />
           </ol>}
         </div>
       </div>
