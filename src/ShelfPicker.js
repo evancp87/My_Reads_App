@@ -16,7 +16,7 @@ class ShelfPicker extends Component {
     return (
       <div className="book-shelf-changer">
         <select 
-        value={this.props.book.shelf}
+        value={this.state.value}
         onChange={(event) => {this.handleChange(event)}}
         >
           <option value="move" disabled>

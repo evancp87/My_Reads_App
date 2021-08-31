@@ -13,7 +13,6 @@ class BookShelf extends Component {
     const alreadyRead = this.props.books.filter(
       (book) => book.shelf === "alreadyRead"
     );
-    // TODO change background image, background authors and title to placeholders
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -34,14 +33,14 @@ class BookShelf extends Component {
                         style={{
                           width: 128,
                           height: 193,
-                          backgroundImage: "url()",
+                          backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : '',
                         }}
                       />
                       <div className="book-title">{book.title}</div>
-                      <div className="book-authors">{book.author}</div>
+                      <div className="book-authors">{book.authors}</div>
                       <ShelfPicker
                         className="book-shelf-changer"
-                        onClick={() => this.props.onChangeShelf(book)}
+                        onChange={() => this.props.onChangeShelf(book)}
                       />
                     </li>
                   ))}
@@ -61,15 +60,16 @@ class BookShelf extends Component {
                           style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: "url(`${book.imageLink}`)",
+                            backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : '',
                           }}
                         />
                         <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.author}</div>
+                        <div className="book-authors">{book.authors}</div>
                         <ShelfPicker
                           className="book-shelf-changer"
-                          onClick={() => this.props.onChangeShelf(book)}
+                          onChange={() => this.props.onChangeShelf(book)}
                         />
+                        
                       </li>
                     ))}
                   </ol>
@@ -80,8 +80,7 @@ class BookShelf extends Component {
                 <h2 className="bookshelf-title">Read</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
-                    {alreadyRead.map((book) =>
-                      book(
+                    {alreadyRead.map((book) => (
                         <li key={book.title}>
                           <div className="book"></div>
                           <div className="book-top"></div>
@@ -90,15 +89,16 @@ class BookShelf extends Component {
                             style={{
                               width: 128,
                               height: 192,
-                              backgroundImage: "url()",
+                              backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : '',
                             }}
                           />
                           <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.author}</div>
+                          <div className="book-authors">{book.authors}</div>
                           <ShelfPicker
                             className="book-shelf-changer"
-                            onClick={() => this.props.onChangeShelf(book)}
+                            onChange={() => this.props.onChangeShelf(book)}
                           />
+                          
                         </li>
                       )
                     )}

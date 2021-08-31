@@ -21,6 +21,7 @@ class BookSearch extends Component {
               this.setState(() => ({ searchBooks: searchBooks, }));
             } else {
                 this.SetState(() => ({ searchBooks: [] }));
+              
             }
             return searchBooks;
         } catch (error) {
@@ -31,12 +32,14 @@ class BookSearch extends Component {
   render() {
     const { query } = this.state;
     const { books, onChangeShelf } = this.props;
-    const showBooks =
-      query === ""
-        ? books
-        : books.filter((bk) =>
-            bk.name.toLowerCase().includes(query.toLowerCase())
-          );
+
+    const showBooks = this.state.searchBooks;
+      
+    // query === ""
+    //     ? books
+    //     : books.filter((bk) =>
+    //         bk.name.toLowerCase().includes(query.toLowerCase())
+    //       );
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -54,7 +57,7 @@ class BookSearch extends Component {
         </div>
         <div className="search-books-results">
           {<ol className="books-grid">
-              {/* searchBooks to go below in place of showBooks */}
+             
             {showBooks.map((book) => (
               <li key={book.title}>
                 <div className="book"></div>
@@ -64,11 +67,11 @@ class BookSearch extends Component {
                   style={{
                     width: 128,
                     height: 193,
-                    backgroundImage: `url(${book.imageLinks.thumbnail})`,
+                    backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : '',
                   }}
                 />
                 <div className="book-title">{book.title}</div>
-                <div className="book-authors">{book.author}</div>
+                <div className="book-authors">{book.authors}</div>
                 <ShelfPicker
                   className="book-shelf-changer"
                   onChange={() => onChangeShelf(book)}
