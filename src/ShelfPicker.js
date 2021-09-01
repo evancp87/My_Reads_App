@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 
 class ShelfPicker extends Component {
+  state = {
+    value: "",
+  };
 
-    state ={
-        value: '',
-    }
-
-    handleChange = event => {
-      this.setState({value: event.target.value},
-      () => this.props.changeShelf(this.props.book, this.state.value));
-      event.preventDefault();
-    }
+  handleChange = (event) => {
+    this.setState({ value: event.target.value }, () =>
+      this.props.changeShelf(this.props.book, this.state.value)
+    );
+    event.preventDefault();
+  };
 
   render() {
     return (
-      <div className="book-shelf-changer">
-        <select 
-        value={this.state.value}
-        onChange={(event) => {this.handleChange(event)}}
+        <select
+          value={this.state.value}
+          onChange={(event) => {
+            this.handleChange(event);
+          }}
         >
           <option value="move" disabled>
             Move to...
@@ -27,7 +28,7 @@ class ShelfPicker extends Component {
           <option value="alreadyRead">Read</option>
           <option value="none">None</option>
         </select>
-      </div>
+      
     );
   }
 }

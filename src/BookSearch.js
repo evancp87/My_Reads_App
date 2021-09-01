@@ -15,18 +15,17 @@ class BookSearch extends Component {
     }));
     if (query !== "") {
       const searchBooks = await BooksAPI.search(query);
-      
+
       try {
-          if (searchBooks !== undefined && searchBooks.length > 1) {
-              this.setState(() => ({ searchBooks: searchBooks, }));
-            } else {
-                this.SetState(() => ({ searchBooks: [] }));
-              
-            }
-            return searchBooks;
-        } catch (error) {
-            console.log(error);
+        if (searchBooks !== undefined && searchBooks.length > 1) {
+          this.setState(() => ({ searchBooks: searchBooks }));
+        } else {
+          this.SetState(() => ({ searchBooks: [] }));
         }
+        return searchBooks;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   render() {
@@ -34,7 +33,7 @@ class BookSearch extends Component {
     const { books, onChangeShelf } = this.props;
 
     const showBooks = this.state.searchBooks;
-      
+
     // query === ""
     //     ? books
     //     : books.filter((bk) =>
@@ -56,29 +55,32 @@ class BookSearch extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {<ol className="books-grid">
-             
-            {showBooks.map((book) => (
-              <li key={book.title}>
-                <div className="book"></div>
-                <div className="book-top"></div>
-                <div
-                  className="book-cover"
-                  style={{
-                    width: 128,
-                    height: 193,
-                    backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : '',
-                  }}
-                />
-                <div className="book-title">{book.title}</div>
-                <div className="book-authors">{book.authors}</div>
-                <ShelfPicker
-                  className="book-shelf-changer"
-                  onChange={() => onChangeShelf(book)}
-                />
-              </li>
-            ))}
-          </ol>}
+          {
+            <ol className="books-grid">
+              {showBooks.map((book) => (
+                <li key={book.title}>
+                  <div className="book"></div>
+                  <div className="book-top"></div>
+                  <div
+                    className="book-cover"
+                    style={{
+                      width: 128,
+                      height: 193,
+                      backgroundImage: book.imageLinks
+                        ? `url(${book.imageLinks.thumbnail})`
+                        : "",
+                    }}
+                  />
+                  <div className="book-title">{book.title}</div>
+                  <div className="book-authors">{book.authors}</div>
+                  <ShelfPicker
+                    className="book-shelf-changer"
+                    onChange={() => onChangeShelf(book)}
+                  />
+                </li>
+              ))}
+            </ol>
+          }
         </div>
       </div>
     );

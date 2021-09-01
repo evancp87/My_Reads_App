@@ -1,20 +1,20 @@
 import React from "react";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
+import Shelves from "./Shelves";
 import { Route } from "react-router-dom";
-import BookShelf from "./BookShelf";
 import BookSearch from "./BookSearch";
 
 class BooksApp extends React.Component {
   state = {
     books: [],
-    screen: "bookshelf",
+    screen: "shelves",
   };
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState(() => ({ books }));
-      console.log(books)
+      console.log(books);
     });
   }
 
@@ -35,8 +35,8 @@ class BooksApp extends React.Component {
           exact
           path="/"
           render={() => (
-            <BookShelf
-              changeShelf={this.changeShelf}
+            <Shelves
+              onChangeShelf={this.changeShelf}
               books={this.state.books}
               onNavigate={() => {
                 this.setState(() => ({ screen: "search" }));
