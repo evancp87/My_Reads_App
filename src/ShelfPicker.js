@@ -7,12 +7,13 @@ class ShelfPicker extends Component {
 
   handleChange = (event) => {
     this.setState({ value: event.target.value }, () =>
-      this.props.changeShelf(this.props.book, this.state.value)
+      this.props.onchangeShelf(this.props.book, this.state.value)
     );
     event.preventDefault();
   };
 
   render() {
+      
     return (
         <select
           value={this.state.value}
