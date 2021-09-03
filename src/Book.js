@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import ShelfPicker from './ShelfPicker'
 
 class Book extends Component {
+  
   render() {
     const { book } = this.props;
     return (
       
-        <li key ={book.title}>
+        <li>
           <div className="book">
             <div className="book-top"></div>
             <div
@@ -20,12 +21,12 @@ class Book extends Component {
               }}
             ></div>
             <div className="book-shelf-changer">
-              {<ShelfPicker
-              value={this.state.value}
+              <ShelfPicker
+              value={book.shelf}
               onChange={(event) => {
                 this.handleChange(event);
             }}
-              />}
+              />
             </div>
 
             <div className="book-title">{book.title ? book.title : 'no title provided'}</div>

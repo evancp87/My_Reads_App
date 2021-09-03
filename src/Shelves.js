@@ -12,7 +12,6 @@ class Shelves extends Component {
       { shelfName: "Read", id: "read" },
     ];
     
-    const booksOnShelf = this.props.books.filter(book=>book.shelf === shelves);
 
     return (
       <div className="list-books">
@@ -22,14 +21,16 @@ class Shelves extends Component {
         <div className="list-books-content">
           <div>
             {/* TODO: might have to change books prop back to this.props.books */}
-            {shelves.map((shelf) => (
+            {shelves.map((shelf) => {
+              const booksOnShelf = this.props.books.filter(book=>book.shelf === shelf.id);
+              return ( 
               <BookShelf
               key={shelves.id}   
                 books={booksOnShelf}
                 shelfName={shelf.shelfName}
                 changeShelf={this.props.changeShelf}
               />
-            ))}
+            )})}
           </div>
 
           <div className="open-search">
