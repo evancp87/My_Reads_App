@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as BooksAPI from "./BooksAPI";
-import ShelfPicker from "./ShelfPicker";
+import Book from "./Book";
 import { Link } from "react-router-dom";
 
 class BookSearch extends Component {
@@ -9,28 +9,47 @@ class BookSearch extends Component {
     searchBooks: [],
   };
 
+  // TODO: if (query !== book.id || boo.authors)
+
   updateQuery = async (query) => {
     this.setState(() => ({
       query: query,
     }));
-    if (query !== "") {
+
+    if (query === "") {
+      this.setState(() => ({ searchBooks: [], }));
+    } else if (query !== "") {
       const searchBooks = await BooksAPI.search(query);
 
       try {
         if (searchBooks !== undefined && searchBooks.length > 1) {
           this.setState(() => ({ searchBooks: searchBooks }));
+        } else if ( searchBooks.error){
+            this.setState(() => ({searchBooks: []}))
+    
+    
         } else {
           this.SetState(() => ({ searchBooks: [] }));
         }
         return searchBooks;
-      } catch (error) {
+      } catch(error) {
         console.log(error);
       }
     }
+
+    // const delayedQuery = useCallback(debounce(updateQuery, 500), [query])
+    // useEffect(() => {
+    //     delayedQuery();
+     
+       
+    //     return delayedQuery.cancel;
+    //  }, [query, delayedQuery]);
   };
+
   render() {
     const { query } = this.state;
-    const { books, onChangeShelf } = this.props;
+
+    // const { books, changeShelf } = this.props;
 
     const showBooks = this.state.searchBooks;
 
@@ -58,24 +77,11 @@ class BookSearch extends Component {
           {
             <ol className="books-grid">
               {showBooks.map((book) => (
-                <li key={book.title}>
-                  <div className="book"></div>
-                  <div className="book-top"></div>
-                  <div
-                    className="book-cover"
-                    style={{
-                      width: 128,
-                      height: 193,
-                      backgroundImage: book.imageLinks
-                        ? `url(${book.imageLinks.thumbnail})`
-                        : "",
-                    }}
-                  />
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors}</div>
-                  <ShelfPicker
-                    className="book-shelf-changer"
-                    onChange={() => onChangeShelf(book)}
+                <li key={book.id}>
+                  <Book
+                    book={book}
+                    changeShelf={this.props.changeShelf}
+                    currentShelf={book.shelf}
                   />
                 </li>
               ))}

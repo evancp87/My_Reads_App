@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import ShelfPicker from './ShelfPicker'
+import ShelfPicker from "./ShelfPicker";
 
 class Book extends Component {
-  
   render() {
-    const { book } = this.props;
+    const { book, onChangeShelf } = this.props;
     return (
-      
-        <li>
-          <div className="book">
-            <div className="book-top"></div>
+    
+        <div className="book">
+          <div className="book-top">
             <div
               className="book-cover"
               style={{
@@ -22,18 +20,22 @@ class Book extends Component {
             ></div>
             <div className="book-shelf-changer">
               <ShelfPicker
-              value={book.shelf}
-              onChange={(event) => {
-                this.handleChange(event);
-            }}
+                value={book.shelf}
+                onChange={this.handleChange
+                }
+                onChangeShelf={onChangeShelf}
               />
             </div>
-
-            <div className="book-title">{book.title ? book.title : 'no title provided'}</div>
-            <div className="book-authors">{book.authors ? book.authors.join(',') : 'no author provided'}</div>
           </div>
-        </li>
 
+          <div className="book-title">
+            {book.title ? book.title : "no title provided"}
+          </div>
+          <div className="book-authors">
+            {book.authors ? book.authors.join(",") : "no author provided"}
+          </div>
+        </div>
+      
     );
   }
 }

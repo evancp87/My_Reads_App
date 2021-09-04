@@ -2,24 +2,22 @@ import React, { Component } from "react";
 
 class ShelfPicker extends Component {
   state = {
-    value: "",
+    value: this.props.shelf,
   };
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value }, () =>
-      this.props.onchangeShelf(this.props.book, this.state.value)
-    );
+  handleChange = event => {
+    this.setState({ value: event.target.value });  
+      this.props.onChangeShelf(this.props.book, event.target.value)
     event.preventDefault();
   };
 
   render() {
-      
+
+
     return (
         <select
           value={this.state.value}
-          onChange={(event) => {
-            this.handleChange(event);
-          }}
+          onChange={this.handleChange}
         >
           <option value="move" disabled>
             Move to...
