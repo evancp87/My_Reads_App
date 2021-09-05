@@ -51,6 +51,7 @@ class BooksApp extends React.Component {
               shelves={this.shelf}
               onNavigate={() => {
                 this.setState(() => ({ screen: "search" }));
+                
               }}
             />
           )}
@@ -61,7 +62,6 @@ class BooksApp extends React.Component {
             <BookSearch
               books={this.state.books}
               onChangeShelf={this.changeShelf}
-              
             />
           )}
         ></Route>

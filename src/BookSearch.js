@@ -7,6 +7,7 @@ class BookSearch extends Component {
   state = {
     query: "",
     searchBooks: [],
+    errorMessage: "",
   };
 
   // TODO: if (query !== book.id || boo.authors)
@@ -24,10 +25,10 @@ class BookSearch extends Component {
       try {
         if (searchBooks !== undefined && searchBooks.length > 1) {
           this.setState(() => ({ searchBooks: searchBooks }));
-        } else if ( searchBooks.error){
-            this.setState(() => ({searchBooks: []}))
-    
-    
+        } else if ( searchBooks.error || searchBooks === undefined) {
+            this.setState(() => ({searchBooks: []})); 
+            
+
         } else {
           this.SetState(() => ({ searchBooks: [] }));
         }
@@ -49,7 +50,7 @@ class BookSearch extends Component {
   render() {
     const { query } = this.state;
 
-    // const { books, changeShelf } = this.props;
+    const { onChangeShelf } = this.props;
 
     const showBooks = this.state.searchBooks;
 
@@ -80,8 +81,9 @@ class BookSearch extends Component {
                 <li key={book.id}>
                   <Book
                     book={book}
-                    changeShelf={this.props.changeShelf}
+                    onChangeShelf={onChangeShelf}
                     currentShelf={book.shelf}
+                    
                   />
                 </li>
               ))}

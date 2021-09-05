@@ -18,6 +18,7 @@ class ShelfPicker extends Component {
         <select
           value={this.state.value}
           onChange={this.handleChange}
+          
         >
           <option value="move" disabled>
             Move to...

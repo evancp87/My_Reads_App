@@ -3,7 +3,7 @@ import ShelfPicker from "./ShelfPicker";
 
 class Book extends Component {
   render() {
-    const { book, onChangeShelf } = this.props;
+    const { book, onChangeShelf, handleChange } = this.props;
     return (
     
         <div className="book">
@@ -21,9 +21,11 @@ class Book extends Component {
             <div className="book-shelf-changer">
               <ShelfPicker
                 value={book.shelf}
-                onChange={this.handleChange
+                onChange={handleChange
                 }
+                handleChange={this.props.handleChange}
                 onChangeShelf={onChangeShelf}
+                book={book}
               />
             </div>
           </div>
