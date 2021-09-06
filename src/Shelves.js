@@ -24,7 +24,7 @@ class Shelves extends Component {
               const booksOnShelf = this.props.books.filter(book=>book.shelf === shelf.id);
               return ( 
               <div key={shelf.id}>
-              <BookShelf  
+              <BookShelf
                 books={booksOnShelf}
                 shelfName={shelf.shelfName}
                 onChangeShelf={onChangeShelf}

@@ -80,6 +80,7 @@ class BookSearch extends Component {
               {showBooks.map((book) => (
                 <li key={book.id}>
                   <Book
+                  value={book.shelf}
                     book={book}
                     onChangeShelf={onChangeShelf}
                     currentShelf={book.shelf}

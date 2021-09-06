@@ -12,11 +12,11 @@ class ShelfPicker extends Component {
   };
 
   render() {
-
+const {book} = this.props;
 
     return (
         <select
-          value={this.state.value}
+          value={book.shelf}
           onChange={this.handleChange}
           
         >
