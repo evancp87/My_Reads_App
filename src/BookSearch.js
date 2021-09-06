@@ -7,7 +7,7 @@ class BookSearch extends Component {
   state = {
     query: "",
     searchBooks: [],
-    errorMessage: "",
+   
   };
 
   // TODO: if (query !== book.id || boo.authors)
@@ -50,7 +50,7 @@ class BookSearch extends Component {
   render() {
     const { query } = this.state;
 
-    const { onChangeShelf } = this.props;
+    const { onChangeShelf, books } = this.props;
 
     const showBooks = this.state.searchBooks;
 
@@ -77,17 +77,21 @@ class BookSearch extends Component {
         <div className="search-books-results">
           {
             <ol className="books-grid">
-              {showBooks.map((book) => (
+              {showBooks.map((book) => {
+                  const bookOnShelf = books.find(({id}) => showBooks.id === id );
+                  const shelf = bookOnShelf ? bookOnShelf.shelf : 'none';
+                  
+                  return (
                 <li key={book.id}>
                   <Book
                   value={book.shelf}
                     book={book}
                     onChangeShelf={onChangeShelf}
-                    currentShelf={book.shelf}
+                    currentShelf={shelf}
                     
                   />
                 </li>
-              ))}
+  )})}
             </ol>
           }
         </div>

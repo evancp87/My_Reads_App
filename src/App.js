@@ -29,6 +29,7 @@ class BooksApp extends React.Component {
      .then((res) => {
       this.setState({
         books: res,
+        searchBooks: res,
 // .filter((bk) => bk.id !== book.id)
 //           .concat({ ...book, shelf }),
       });
@@ -60,6 +61,7 @@ class BooksApp extends React.Component {
           render={() => (
             <BookSearch
               books={this.state.books}
+              shelves={this.shelf}
               onChangeShelf={this.changeShelf}
             
             />
