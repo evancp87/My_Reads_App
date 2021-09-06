@@ -28,7 +28,7 @@ class Shelves extends Component {
                 books={booksOnShelf}
                 shelfName={shelf.shelfName}
                 onChangeShelf={onChangeShelf}
-                
+                currentShelf={shelf}
               />
               </div>
             )})}

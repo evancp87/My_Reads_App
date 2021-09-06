@@ -30,8 +30,7 @@ class BooksApp extends React.Component {
       this.setState({
         books: res,
         searchBooks: res,
-// .filter((bk) => bk.id !== book.id)
-//           .concat({ ...book, shelf }),
+
       });
       
     })});  

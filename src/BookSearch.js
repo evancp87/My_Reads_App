@@ -10,7 +10,6 @@ class BookSearch extends Component {
    
   };
 
-  // TODO: if (query !== book.id || boo.authors)
 
   updateQuery = async (query) => {
     this.setState(() => ({
@@ -38,13 +37,7 @@ class BookSearch extends Component {
       }
     }
 
-    // const delayedQuery = useCallback(debounce(updateQuery, 500), [query])
-    // useEffect(() => {
-    //     delayedQuery();
-     
-       
-    //     return delayedQuery.cancel;
-    //  }, [query, delayedQuery]);
+  
   };
 
   render() {
@@ -54,11 +47,7 @@ class BookSearch extends Component {
 
     const showBooks = this.state.searchBooks;
 
-    // query === ""
-    //     ? books
-    //     : books.filter((bk) =>
-    //         bk.name.toLowerCase().includes(query.toLowerCase())
-    //       );
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -78,16 +67,14 @@ class BookSearch extends Component {
           {
             <ol className="books-grid">
               {showBooks.map((book) => {
-                  const bookOnShelf = books.find(({id}) => showBooks.id === id );
+                  const bookOnShelf = books.find(({id}) => book.id === id );
                   const shelf = bookOnShelf ? bookOnShelf.shelf : 'none';
                   
                   return (
                 <li key={book.id}>
                   <Book
-                  value={book.shelf}
-                    book={book}
+                    book={{...book, shelf}}
                     onChangeShelf={onChangeShelf}
-                    currentShelf={shelf}
                     
                   />
                 </li>
