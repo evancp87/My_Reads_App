@@ -22,7 +22,7 @@ class BookSearch extends Component {
       const searchBooks = await BooksAPI.search(query);
 
       try {
-        if (searchBooks !== undefined && searchBooks.length > 1) {
+        if (searchBooks.length > 1 && searchBooks !== undefined) {
           this.setState(() => ({ searchBooks: searchBooks }));
         } else if ( searchBooks.error || searchBooks === undefined) {
             this.setState(() => ({searchBooks: []})); 
